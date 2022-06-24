@@ -7,10 +7,11 @@ import { getUserDataAPI } from "../../api";
 export const fetchUserData = createAsyncThunk(
   "fetchAccountData",
   (_, { dispatch }) => {
-    console.log("dispatch");
     return getUserDataAPI()
       .then((data) => {
-        console.log("data", data);
+        const count = data.totalCount;
+        delete data.totalCount;
+        console.log("444444", Object.values(data));
         return data;
       })
       .catch((error) => {
@@ -22,7 +23,7 @@ export const fetchUserData = createAsyncThunk(
 export const userReducer = createSlice({
   name: "user",
   initialState: {
-    userData: null,
+    userData: [],
     warningMessage: "",
   },
   reducers: {
@@ -35,7 +36,7 @@ export const userReducer = createSlice({
   },
   extraReducers: {
     [fetchUserData.fulfilled]: (state, action) => {
-      state.account = action.payload;
+      state.userData = action.payload;
     },
   },
 });

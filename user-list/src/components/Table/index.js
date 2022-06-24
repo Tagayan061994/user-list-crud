@@ -33,6 +33,17 @@ const columns = [
         params.getValue(params.id, "lastName") || ""
       }`,
   },
+  // {
+  //   field: "fullName",
+  //   headerName: "Faaa",
+  //   description: "This column has a value getter and is not sortable.",
+  //   sortable: false,
+  //   width: 160,
+  //   valueGetter: (params) =>
+  //     `${params.getValue(params.id, "firstName") || ""} ${
+  //       params.getValue(params.id, "lastName") || ""
+  //     }`,
+  // },
 ];
 
 const rows = [
@@ -45,9 +56,13 @@ const rows = [
   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export const DataTable = () => {
+export const DataTable = (props) => {
+  const { userData } = props;
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid

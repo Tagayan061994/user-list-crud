@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { DataTable } from "../../components/Table";
 import { fetchUserData } from "../../redux/globals";
+import { selectUserData } from "../../redux/globals/selectors";
 
-const UserList = ({ fetchUserData }) => {
+const UserList = ({ fetchUserData, userData }) => {
   useEffect(() => {
     if ("isAccountFetched") {
       fetchUserData();
@@ -13,15 +14,13 @@ const UserList = ({ fetchUserData }) => {
   return (
     <div>
       <h1>UserList</h1>
-      <DataTable />
+      <DataTable userData={userData} />
     </div>
   );
 };
 
 const mapStateToProps = (state: TStore) => ({
-  //   isAccountFetched: getIsAccountFetched(state),
-  //   isStorageFetched: getIsStorageDataFetched(state),
-  //   isSubscriptionFetched: getIsSubscriptionsFetched(state),
+  userData: selectUserData(state),
 });
 
 export default connect(mapStateToProps, {

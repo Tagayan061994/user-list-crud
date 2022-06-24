@@ -1,4 +1,4 @@
-export const USER_LIST_URL = "https://api.github.com/users";
+export const USER_LIST_URL = "https://api.github.com/user";
 
 export const COMMON_HEADERS = {
   Accept: "application/json",
