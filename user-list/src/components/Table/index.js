@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import { LinkButton } from "../LinkButton";
 
 const columns = [
   { field: "id", headerName: "ID", width: 120 },
@@ -31,6 +32,36 @@ const columns = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    sortable: false,
+    renderCell: (params) => {
+      const onClick = (e) => {
+        e.stopPropagation(); // don't select this row after clicking
+
+        const api: GridApi = params.api;
+        const thisRow: Record<string, GridCellValue> = {};
+
+        api
+          .getAllColumns()
+          .filter((c) => c.field !== "__check__" && !!c)
+          .forEach(
+            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+          );
+
+        return alert(JSON.stringify(thisRow, null, 4));
+      };
+
+      return (
+        <LinkButton
+          text={"profile"}
+          linkUrl={"./userProfile"}
+          action={onClick}
+        />
+      );
+    },
   },
 ];
 
