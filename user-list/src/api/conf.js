@@ -1,8 +1,8 @@
-export const USER_LIST_URL = "https://api.github.com/user";
-
+export const USER_LIST_URL = "https://api.github.com/users";
 export const COMMON_HEADERS = {
   Accept: "application/json",
   "Content-Type": "application/json",
+  Authorization: "TOKEN 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",
 };
 
 export const HEADERS = {

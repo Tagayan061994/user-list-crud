@@ -2,48 +2,36 @@ import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerName: "ID", width: 120 },
   {
-    field: "firstName",
-    headerName: "First name",
+    field: "type",
+    headerName: "Type",
     width: 150,
-    editable: true,
+    editable: false,
+    click: () => {
+      console.log("clicked");
+    },
   },
   {
-    field: "lastName",
-    headerName: "Last name",
+    field: "login",
+    headerName: "Login",
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "node_id",
+    headerName: "Node_id",
+    type: "string",
     width: 110,
-    editable: true,
+    editable: false,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
+    field: "url",
+    headerName: "Url",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, "firstName") || ""} ${
-        params.getValue(params.id, "lastName") || ""
-      }`,
   },
-  // {
-  //   field: "fullName",
-  //   headerName: "Faaa",
-  //   description: "This column has a value getter and is not sortable.",
-  //   sortable: false,
-  //   width: 160,
-  //   valueGetter: (params) =>
-  //     `${params.getValue(params.id, "firstName") || ""} ${
-  //       params.getValue(params.id, "lastName") || ""
-  //     }`,
-  // },
 ];
 
 const rows = [
@@ -62,15 +50,25 @@ const rows = [
 
 export const DataTable = (props) => {
   const { userData } = props;
-
+  console.log("3333333333", userData);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={userData}
         columns={columns}
         pageSize={5}
         checkboxSelection
         disableSelectionOnClick
+        onCellClick={(
+          params: GridCellParams,
+          event: MuiEvent<React.MouseEvent>
+        ) => {
+          event.defaultMuiPrevented = true;
+          console.log("sss", params);
+        }}
+        components={{
+          s: <div>dmkdmkmdk </div>,
+        }}
       />
     </div>
   );

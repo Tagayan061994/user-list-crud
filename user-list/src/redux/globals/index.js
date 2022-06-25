@@ -9,10 +9,10 @@ export const fetchUserData = createAsyncThunk(
   (_, { dispatch }) => {
     return getUserDataAPI()
       .then((data) => {
-        const count = data.totalCount;
+        //I need to delete totalCaount feiled from respnse data, because its alwas null
+        //And as the response data is an Object, I need to pars it to Array
         delete data.totalCount;
-        console.log("444444", Object.values(data));
-        return data;
+        return Object.values(data);
       })
       .catch((error) => {
         // dispatch(setApiErrorMessage(error));

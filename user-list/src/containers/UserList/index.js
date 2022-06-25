@@ -10,7 +10,7 @@ const UserList = ({ fetchUserData, userData }) => {
       fetchUserData();
     }
   }, []);
-
+  console.log("2222", userData);
   return (
     <div>
       <h1>UserList</h1>
