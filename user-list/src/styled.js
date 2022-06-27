@@ -5,4 +5,3 @@ export const AppContainer = styled.div`
   height: 100%;
   border: 1px solid;
 `;
-export const AppBodyContainer = styled.div``;
