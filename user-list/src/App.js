@@ -1,9 +1,6 @@
 // @flow
 import React from "react";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// import ApiErrorPopup from "components/api-error-popup";
 import Community from "./containers/Community/index";
 import UserProfile from "./containers/UserProfile/index.js";
 import UserList from "./containers/UserList/index.js";
@@ -14,11 +11,10 @@ const App = () => {
   return (
     <Styled.AppContainer>
       <MainHeader />
-      {/* <ApiErrorPopup /> */}
       <Routes>
-        <Route path="/userList" element={<UserList />} />
-        <Route path="/userProfile" element={<UserProfile />} />
-        <Route path="/community" element={<Community />} />
+        <Route exact path="userList" element={<UserList />} />
+        <Route exact path="userProfile" element={<UserProfile />} />
+        <Route exact path="community" element={<Community />} />
       </Routes>
     </Styled.AppContainer>
   );

@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "./styled";
+import { NavLink } from "react-router-dom";
 
-export const LinkButton = ({ linkUrl, text, action }) => {
+export const LinkButton = ({ linkUrl, text, action, color }) => {
   return (
-    <Button onclick={action}>
-      <Link to={linkUrl}>{text}</Link>
+    <Button color={color}>
+      <NavLink to={linkUrl} onClick={action}>
+        {text}
+      </NavLink>
     </Button>
   );
 };

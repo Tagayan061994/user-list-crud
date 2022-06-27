@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
   height: 60px;
@@ -14,9 +15,14 @@ export const HeaderContainer = styled.div`
   }
 `;
 
+export const MenuItem = styled(NavLink)`
+  text-decoration: none;
+  color: white;
+`;
+
 export const HeaderNavigationWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   .header-link {
     padding: 10px;

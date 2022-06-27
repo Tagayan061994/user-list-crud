@@ -1,6 +1,6 @@
 // @flow
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getUserDataAPI } from "../../api";
+import { getUserDataAPI, getUserDataByIdAPI } from "../../api";
 // import { setApiErrorMessage } from "reduxStore/globals";
 // import { openUrl } from "utils";
 
@@ -15,20 +15,35 @@ export const fetchUserData = createAsyncThunk(
         return Object.values(data);
       })
       .catch((error) => {
-        // dispatch(setApiErrorMessage(error));
+        dispatch(setWarningMessage(error));
       });
   }
 );
 
-export const userReducer = createSlice({
+export const fetchUserDataById = createAsyncThunk(
+  "fetchUserDataById",
+  (userId, { dispatch }) => {
+    return getUserDataByIdAPI(userId)
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        dispatch(setWarningMessage(error));
+      });
+  }
+);
+
+export const globals = createSlice({
   name: "user",
   initialState: {
     userData: [],
+    userProfileData: [],
+    selectedUserIds: [],
     warningMessage: "",
   },
   reducers: {
-    setUserDat: (state, action) => {
-      state.userData = action.payload;
+    setSelectedUserIds: (state, action) => {
+      state.selectedUserIds = action.payload;
     },
     setWarningMessage: (state, action) => {
       state.warningMessage = action.payload;
@@ -38,7 +53,12 @@ export const userReducer = createSlice({
     [fetchUserData.fulfilled]: (state, action) => {
       state.userData = action.payload;
     },
+    [fetchUserDataById.fulfilled]: (state, action) => {
+      state.userProfileData = action.payload;
+    },
   },
 });
 
-export default userReducer.reducer;
+const { setSelectedUserIds, setWarningMessage } = globals.actions;
+export { setSelectedUserIds, setWarningMessage };
+export default globals.reducer;

@@ -1,6 +1,7 @@
 import * as React from "react";
+import * as Styled from "./styled";
+import FetchProfileActionBtn from "./ActionBtn";
 import { DataGrid } from "@material-ui/data-grid";
-import { LinkButton } from "../LinkButton";
 
 const columns = [
   { field: "id", headerName: "ID", width: 120 },
@@ -9,9 +10,6 @@ const columns = [
     headerName: "Type",
     width: 150,
     editable: false,
-    click: () => {
-      console.log("clicked");
-    },
   },
   {
     field: "login",
@@ -38,69 +36,25 @@ const columns = [
     headerName: "Action",
     sortable: false,
     renderCell: (params) => {
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-
-        const api: GridApi = params.api;
-        const thisRow: Record<string, GridCellValue> = {};
-
-        api
-          .getAllColumns()
-          .filter((c) => c.field !== "__check__" && !!c)
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        return alert(JSON.stringify(thisRow, null, 4));
-      };
-
-      return (
-        <LinkButton
-          text={"profile"}
-          linkUrl={"./userProfile"}
-          action={onClick}
-        />
-      );
+      return <FetchProfileActionBtn userId={params.id} />;
     },
   },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
-export const DataTable = (props) => {
-  const { userData } = props;
-  console.log("3333333333", userData);
+export const DataTable = React.memo((props) => {
+  const { userData, selectedItemsAction, isCheckboxSelection = true } = props;
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <Styled.DataTableConatiner>
       <DataGrid
+        pageSize={5}
         rows={userData}
         columns={columns}
-        pageSize={5}
-        checkboxSelection
         disableSelectionOnClick
-        onCellClick={(
-          params: GridCellParams,
-          event: MuiEvent<React.MouseEvent>
-        ) => {
-          event.defaultMuiPrevented = true;
-          console.log("sss", params);
-        }}
-        components={{
-          s: <div>dmkdmkmdk </div>,
-        }}
+        checkboxSelection={isCheckboxSelection}
+        onSelectionModelChange={(ids) => selectedItemsAction(ids)}
       />
-    </div>
+    </Styled.DataTableConatiner>
   );
-};
+});
+
+export default DataTable;

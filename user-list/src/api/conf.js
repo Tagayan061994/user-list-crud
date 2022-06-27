@@ -2,7 +2,7 @@ export const USER_LIST_URL = "https://api.github.com/users";
 export const COMMON_HEADERS = {
   Accept: "application/json",
   "Content-Type": "application/json",
-  Authorization: "TOKEN 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",
+  Authorization: "TOKEN ", //write your GitHub npm token to get user data
 };
 
 export const HEADERS = {
