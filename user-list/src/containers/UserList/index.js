@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import * as Styled from "styled-components";
 import { DataTable } from "../../components/Table";
 import { selectUserData } from "../../redux/globals/selectors";
 import { fetchUserData, setSelectedUserIds } from "../../redux/globals";
@@ -10,10 +11,10 @@ const UserList = ({ fetchUserData, userData, setSelectedUserIds }) => {
   }, []);
 
   return (
-    <div>
-      <h1>UserList</h1>
+    <Styled.UserListContainer>
+      <Styled.UserListTitle>UserList</Styled.UserListTitle>
       <DataTable userData={userData} selectedItemsAction={setSelectedUserIds} />
-    </div>
+    </Styled.UserListContainer>
   );
 };
 

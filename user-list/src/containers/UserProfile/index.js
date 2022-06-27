@@ -43,7 +43,9 @@ const UserProfile = ({ userProfileData }) => {
         </Styled.UserInfoWrapper>
       </Styled.UserProfileFirstSection>
       <Styled.UserProfileFirstSection>
-        <h1>user profile subscriptions and repos urls</h1>
+        <Styled.UserProfileTitle>
+          User profile subscriptions and repos urls
+        </Styled.UserProfileTitle>
         <span>Created at {created_at}</span>
         <a href={repos_url} target="_blank">
           Repos url

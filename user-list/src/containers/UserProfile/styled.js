@@ -35,6 +35,10 @@ export const UserInfoWrapper = styled.div`
 export const UserProfileSecondSection = styled.div``;
 export const UserInfoList = styled.ul``;
 
+export const UserProfileTitle = styled.h1`
+  color: aquamarine;
+`;
+
 export const UserListItem = styled.li`
   font-size: 16px;
   font-weight: 500;
